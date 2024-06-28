@@ -4,7 +4,7 @@ from discord.ext.commands import *
 
 token = ''
 
-bot = commands.Bot(command_prefix='/', intents=discord.Intents.all())
+bot = commands.Bot(command_prefix='*', intents=discord.Intents.all())
 
 @bot.event
 async def of_ready():
@@ -14,13 +14,15 @@ async def of_ready():
 async def on_message(message):
     if message.author.bot:
         return  
+    if message[0] == "*":
+        return
     print(f'Получено сообщение! Текст:\n{message.content}\nСервер:\n{message.guild}')
 
 
 @bot.command()
-async def help(ctx):
+async def help_bot(ctx):
     await ctx.send("Это бот по Майнкрафту, и он тебе поможет")
 
 
 
-bot.run()
+bot.run(token)
